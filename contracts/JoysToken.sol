@@ -12,22 +12,6 @@ contract JoysToken is ERC20("JoysToken", "JOYS"), Ownable {
     using SafeMath for uint256;
     using SafeERC20 for IERC20;
 
-    /**
-    * @notice JoysToken constructor with total supply 30 million
-    */
-    constructor() public {
-        uint256 totalSupply = 300000000 * 1e18;
-        _mint(_msgSender(), totalSupply);
-    }
-
-    /**
-    * @notice Burn _amount joys
-    * @param _amount of Joys token to burn
-    */
-    function burn(uint256 _amount) public onlyOwner {
-        _burn(_msgSender(), _amount);
-    }
-
     // @notice Copied and modified from YAM code:
     // https://github.com/yam-finance/yam-protocol/blob/master/contracts/token/YAMGovernanceStorage.sol
     // https://github.com/yam-finance/yam-protocol/blob/master/contracts/token/YAMGovernance.sol
@@ -63,6 +47,40 @@ contract JoysToken is ERC20("JoysToken", "JOYS"), Ownable {
 
     /// @notice An event thats emitted when a delegate account's vote balance changes
     event DelegateVotesChanged(address indexed delegate, uint previousBalance, uint newBalance);
+
+    /**
+    * @notice JoysToken constructor with total supply 30 million
+    */
+    constructor() public {
+        uint256 totalSupply = 300000000 * 1e18;
+        _mint(_msgSender(), totalSupply);
+    }
+
+    /**
+    * @notice Burn _amount joys
+    * @param _amount of Joys token to burn
+    */
+    function burn(uint256 _amount) public onlyOwner {
+        _burn(_msgSender(), _amount);
+    }
+
+    /**
+     * @dev Hook that is called before any transfer of tokens. This includes
+     * minting and burning.
+     *
+     * Calling conditions:
+     *
+     * - when `from` and `to` are both non-zero, `amount` of ``from``'s tokens
+     * will be to transferred to `to`.
+     * - when `from` is zero, `amount` tokens will be minted for `to`.
+     * - when `to` is zero, `amount` of ``from``'s tokens will be burned.
+     * - `from` and `to` are never both zero.
+     *
+     * To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
+     */
+    function _beforeTokenTransfer(address from, address to, uint256 amount) internal override {
+        _moveDelegates(_delegates[from], _delegates[to], amount);
+    }
 
     /**
      * @notice Delegate votes from `msg.sender` to `delegatee`
