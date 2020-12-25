@@ -15,3 +15,4 @@ https://joyswap.org.
 - [JoysWeaponLotteryMeta](https://etherscan.io/address/0x058977169E0449187239E13478Da9095b3D95029) ```0x058977169E0449187239E13478Da9095b3D95029```
 - [JoysLottery](https://etherscan.io/address/0x05310880FBA5f373E871351a4B67A516c20Ce1C2) ```0x05310880FBA5f373E871351a4B67A516c20Ce1C2```
 - [JoysLotteryNew](https://etherscan.io/address/0x3FFFF4FACD37F09B03f79B1EddfdC65316ecB2bD) ```0x3FFFF4FACD37F09B03f79B1EddfdC65316ecB2bD```
+- [JoysNFTMinning](https://etherscan.io/address/0x5C7d2d4f7f42fB39Ba6681A64eb2d45Ea68E5367) ```0x5C7d2d4f7f42fB39Ba6681A64eb2d45Ea68E5367```
